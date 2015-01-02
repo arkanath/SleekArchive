@@ -1,0 +1,156 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+}
+button{
+	box-shadow: 1px 1px 5px #888888;
+}
+button:hover{
+	box-shadow: 1px 1px 10px #888888;
+}
+.newbutton{
+	cursor: pointer;
+	width:80px;
+	height:80px;
+	position: fixed;
+    bottom: 20px;
+    right: 20px;
+	/*margin: 0 auto;*/
+	background:#1565C0; 
+	background-size: 100%;
+	border-radius: 40px;
+	-webkit-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    -moz-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+}
+
+.searchtrash::-webkit-input-placeholder {
+   color: white;
+}
+
+.searchtrash:-moz-placeholder { /* Firefox 18- */
+   color: white;  
+}
+
+.searchtrash::-moz-placeholder {  /* Firefox 19+ */
+   color: white;  
+}
+
+.searchtrash:-ms-input-placeholder {  
+   color: white;  
+}
+.search:focus{
+	border-bottom: 1px solid #212121;
+}
+.searchtrash:focus{
+	border-bottom: 1px solid #212121;
+}
+.trashbutton{
+	cursor: pointer;
+	width:80px;
+	height:80px;
+	position: fixed;
+    bottom: 120px;
+    right: 20px;
+	background:#FF5722; 
+	background-size: 100%;
+	border-radius: 40px;
+	-webkit-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    -moz-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+}
+.logoutbutton{
+	cursor: pointer;
+	width:80px;
+	height:80px;
+	position: fixed;
+    bottom:220px;
+    right: 20px;
+	background:#F44336; 
+	background-size: 100%;
+	border-radius: 40px;
+	-webkit-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    -moz-box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+    box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
+}
+.newbutton:hover{
+	-webkit-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    -moz-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+}
+.logoutbutton:hover{
+	-webkit-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    -moz-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+}
+.trashbutton:hover{
+	-webkit-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    -moz-box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+    box-shadow: 1px 1px 10px  rgba(0, 0, 0, 1);
+}
+.glyphicon{
+	cursor:pointer;
+}
+.notecard{
+	width:70%;
+	margin-left: 15%;
+	margin-bottom:20px;
+	box-shadow: 1px 1px 10px #888888;
+	background: white;
+}
+.innernote{
+	padding-left: 2%;
+	padding-top: 5px;
+	padding-right: 2%;
+	padding-bottom: 5px;
+}
+
+textarea{
+	padding: 0;
+	padding-top: 30px; 
+	width:100%;
+	border: 0 none white;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+}
+
+textarea:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+input{
+	width:100%;
+	border:0px;
+	text-overflow: ellipsis;
+}
+
+input:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+hr{
+	margin:0;
+}
+
+.Roboto-normal-100 {
+
+}
+
+.lastupdated{
+	float:right;
+	font-size: 20px;
+	font-family: 'Roboto' !important;
+	font-style: italic;
+	font-weight: 100;
+}
+
+.created{
+	float:right;
+	font-size: 20px;
+	font-family: 'Roboto' !important;
+	font-style: normal;
+	font-weight: 500;
+}
