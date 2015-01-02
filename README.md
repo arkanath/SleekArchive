@@ -16,5 +16,5 @@ SleekArchive is an open source alternative to applications like Evernote and Goo
 **Installation**:
 
 1. Download source files to your php-mysql enabled host.
-2. Open credentials.php and set your credentials.
+2. Edit credentials.php to set your credentials.
 3. You are all set to go!
