@@ -1,12 +1,13 @@
 <?php
+date_default_timezone_set('UTC');
 function formatDate($t)
 {
-	$tt = time();
+	// $tt = time();
 	$parsedt = date('j F, Y',$t);
-	$parsednow = date('j F, Y',$tt);
-	$parsedyes = date('j F, Y',$tt-24*60*60);
-	if($parsedt==$parsednow) return "Today";
-	if($parsedt==$parsedyes) return "Yesterday";
+	// $parsednow = date('j F, Y',$tt);
+	// $parsedyes = date('j F, Y',$tt-24*60*60);
+	// if($parsedt==$parsednow) return "Today";
+	// if($parsedt==$parsedyes) return "Yesterday";
 	return $parsedt;
 }
 
