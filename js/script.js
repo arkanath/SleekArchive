@@ -10,11 +10,12 @@ function updateident(el)
     editingnote = el.id.substr(5);
 }
 
-
 function updatenote(){
     // $('#lastupdated'+editingnote).html('Saving...');
     var headi = document.getElementById("inp"+editingnote).value;
-    var ent = document.getElementById("entry"+editingnote).value;
+    var ent = $("#entry"+editingnote).html();
+    ent = ent.replace('<mark>','');
+    ent = ent.replace('</mark>','');
     $.get( "updatenote.php", {pass: app_pass, id: editingnote, heading: headi, entry: ent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
         if(data=='1')
@@ -95,25 +96,19 @@ function update(){
     // alert(lastudpdate);
     $('#lastupdated'+editingnote).html('Saving...');
 }
-$('body').on( 'keyup', 'textarea', function (){
-    $(this).height(0);
-    $(this).height(this.scrollHeight);
-    $(this).blur();
-    $(this).focus();
+
+$('body').on( 'keyup', '.noteentry', function (){
     update();
 });
 
+$('body').on( 'click', '.popline-btn', function (){
+    update();
+});
 
 $('body').on( 'keyup', 'input', function (){
     update();
 });
 
-function h1(e) {
-    $(e).css({'height':'auto','overflow-y':'hidden'}).height(e.scrollHeight);
-}
-$('textarea').each(function () {
-  h1(this);
-});
 
 $( document ).ready(function() {
     setInterval(function(){ checkedit(); }, 1000);

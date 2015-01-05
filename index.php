@@ -24,7 +24,25 @@ session_start();
 	<link type="text/css" rel="stylesheet" href="css/animate.css"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	
 	<script src="js/jquery.min.js"></script>
+	
+	<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
+	<link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="themes/default.css" />
+	<link rel="stylesheet" type="text/css" href="css/page.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.popline.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.link.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.blockquote.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.decoration.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.list.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.justify.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.blockformat.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.social.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.backcolor.js"></script>
+
 	<script>
 		var app_pass = '<?php echo APPPASSWORD;?>';
 	</script>
@@ -34,11 +52,11 @@ session_start();
 	<?php
 		if($search!='')
 		{
-			echo '<h1 style="text-align:center;"> Search results for </h1>';
+			echo '<h1 style="text-align:center; font-weight:300;"> Search results for '.$search.'. <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></h1>';
 		}
 	?>
 	<form action="index.php" method="POST">
-		<h2 style="text-align:center; font-weight:300;"><input class="search" style="text-align:center; width:70%;" name="search" id="search" type="text" placeholder="Search" value="<?php echo $search; ?>"></h2>
+		<h2 style="text-align:center; font-weight:300;"><input class="search" style="text-align:center; width:70%;" name="search" id="search" type="text" placeholder="Search"></h2>
 	</form>
 	<div class="newbutton" onclick="newnote();"><h1 style="text-align:center; font-size:40px; padding-top:20px; margin:0;color:white;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></h1></div>
 	<div class="trashbutton" onclick="window.location = 'trash.php';"><h1 style="text-align:center; font-size:40px; padding-top:20px; margin:0;color:white;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></h1></div>
@@ -47,10 +65,16 @@ session_start();
 	
 	<br>
 	<?php
-		$query = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by id DESC';
+		$query = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.str_replace("'","&apos;",$search).'%\') ORDER by id DESC';
 		$res = $con->query($query);
 		while($row = mysqli_fetch_array($res, MYSQLI_ASSOC))
 		{
+			$entryfinal = $row['entry'];
+			if($search!="")
+			{
+				$entryfinal = str_replace(str_replace("'","&apos;",$search),"<mark>".str_replace("'","&apos;",$search)."</mark>",$entryfinal);
+			}
+		
 			echo '<div id="note'.$row['id'].'" class="notecard">
 		<div class="innernote">
 			<div class="created">'.formatDate(strtotime($row['created'])).'</div>
@@ -58,7 +82,7 @@ session_start();
 			<div id="lastupdated'.$row['id'].'" class="lastupdated">Last Updated '.formatDateTime(strtotime($row['updated'])).'</div>
 			<h1><input onfocus="updateidhead(this);" id="inp'.$row['id'].'" type="text" placeholder="Entry Heading" value="'.$row['heading'].'"></input> </h1>
 			<hr>
-			<textarea onload="initials(this);" onfocus="updateident(this);" id="entry'.$row['id'].'" placeholder="Entry Text">'.$row['entry'].'</textarea>
+			<div class="noteentry" onload="initials(this);" onfocus="updateident(this);" id="entry'.$row['id'].'" data-ph="Entry Text" contenteditable="true">'.$entryfinal.'</div>
 			<span onclick="deleteNote(\''.$row['id'].'\')" class="glyphicon glyphicon-trash pull-right" aria-hidden="true"></span>
 			<div style="height:30px;"></div>
 		</div>
@@ -69,4 +93,17 @@ session_start();
 </body>
 	
 	<script src="js/script.js"></script>
+	<script>
+	$(".noteentry").popline();
+	</script>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58163502-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </html>

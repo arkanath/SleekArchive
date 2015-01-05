@@ -17,12 +17,12 @@
 	$res = $con->query($query);
 	$row = mysqli_fetch_array($res,MYSQLI_ASSOC);
 	// die(date("Y-m-d H:i:s", $seconds));
-	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && htmlspecialchars($entry,ENT_QUOTES)==$row['entry'])
+	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && str_replace("'","&apos;",$entry)==$row['entry'])
 	{
 		die('Last Updated '.formatDateTime(strtotime($row['updated'])));
 	}
-	
-	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entry,ENT_QUOTES)."', updated = '".date("Y-m-d H:i:s", $seconds)."' WHERE id=".$id;
+	 
+	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".str_replace("'","&apos;",$entry)."', updated = '".date("Y-m-d H:i:s", $seconds)."' WHERE id=".$id;
 	if($con->query($query)) echo die('Last Updated '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds))));
 	else echo mysqli_error($con);
 ?>

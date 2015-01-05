@@ -24,6 +24,11 @@ button:hover{
     box-shadow:1px 1px 5px  rgba(0, 0, 0, 1);
 }
 
+div[contentEditable=true]:empty:not(:focus):before{
+        content:attr(data-ph);
+        color: #bababa;
+    }
+
 .searchtrash::-webkit-input-placeholder {
    color: white;
 }
@@ -116,6 +121,21 @@ textarea{
 }
 
 textarea:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+.noteentry{
+	padding: 0;
+	padding-top: 15px; 
+	width:100%;
+	border: 0 none white;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+}
+
+.noteentry:focus{
 	border-bottom: 1px;
 	outline: 0;
 }
