@@ -10,13 +10,19 @@ function updateident(el)
     editingnote = el.id.substr(5);
 }
 
+window.onbeforeunload = function(){
+    if(editing!=0){
+        return 'We are still attempting to save something...';
+    }
+};
+
 function updatenote(){
     // $('#lastupdated'+editingnote).html('Saving...');
     var headi = document.getElementById("inp"+editingnote).value;
     var ent = $("#entry"+editingnote).html();
-    ent = ent.replace('<mark>','');
-    ent = ent.replace('</mark>','');
-    $.get( "updatenote.php", {pass: app_pass, id: editingnote, heading: headi, entry: ent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+    console.log(ent);
+    // alert(ent);
+    $.post( "updatenote.php", {pass: app_pass, id: editingnote, heading: headi, entry: ent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
         if(data=='1')
         {
@@ -25,6 +31,7 @@ function updatenote(){
         }
         else
         {
+            editing = 0;
             $('#lastupdated'+editingnote).html(data);
         }
     });
@@ -32,7 +39,7 @@ function updatenote(){
 }
 
 function newnote(){
-    $.get( "insertnew.php", {pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+    $.post( "insertnew.php", {pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
         if(data=='1') 
         {
@@ -61,7 +68,7 @@ function checkedit(){
 function deletePermanent(iid){
     var r = confirm("Are you sure you want to permanently delete the note "+document.getElementById("inp"+iid).value+"?. This action can't be undone.");
     if (r == true) {
-        $.get( "permanentDelete.php", {pass: app_pass, id:iid})
+        $.post( "permanentDelete.php", {pass: app_pass, id:iid})
         .done(function(data) {
             if(data=='1') $('#note'+iid).hide();
             else alert(data);
@@ -70,7 +77,7 @@ function deletePermanent(iid){
 }
 
 function putBack(iid){
-    $.get( "putback.php", {pass: app_pass, id:iid})
+    $.post( "putback.php", {pass: app_pass, id:iid})
     .done(function(data) {
         if(data=='1') $('#note'+iid).hide();
         else alert(data);
@@ -80,7 +87,7 @@ function putBack(iid){
 function deleteNote(iid){
     var r = confirm("Are you sure you want to delete the note "+document.getElementById("inp"+iid).value+"?");
     if (r == true) {
-        $.get( "deletenote.php", {pass: app_pass, id:iid})
+        $.post( "deletenote.php", {pass: app_pass, id:iid})
         .done(function(data) {
             if(data=='1') $('#note'+iid).hide();
             else alert(data);
@@ -89,6 +96,7 @@ function deleteNote(iid){
 }
 
 function update(){
+    if(editingnote=='rch') return;
     editing = 1;
     var curdate = new Date();
     var curtime = curdate.getTime();

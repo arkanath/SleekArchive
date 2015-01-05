@@ -56,7 +56,7 @@ session_start();
 		}
 	?>
 	<form action="index.php" method="POST">
-		<h2 style="text-align:center; font-weight:300;"><input class="search" style="text-align:center; width:70%;" name="search" id="search" type="text" placeholder="Search"></h2>
+		<h2 style="text-align:center; font-weight:300;"><input onfocus="updateidhead(this);" class="search" style="text-align:center; width:70%;" name="search" id="search" type="text" placeholder="Search"></h2>
 	</form>
 	<div class="newbutton" onclick="newnote();"><h1 style="text-align:center; font-size:40px; padding-top:20px; margin:0;color:white;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></h1></div>
 	<div class="trashbutton" onclick="window.location = 'trash.php';"><h1 style="text-align:center; font-size:40px; padding-top:20px; margin:0;color:white;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></h1></div>
@@ -65,16 +65,15 @@ session_start();
 	
 	<br>
 	<?php
-		$query = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.str_replace("'","&apos;",$search).'%\') ORDER by id DESC';
+		$query = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by id DESC';
 		$res = $con->query($query);
 		while($row = mysqli_fetch_array($res, MYSQLI_ASSOC))
 		{
-			$entryfinal = $row['entry'];
-			if($search!="")
-			{
-				$entryfinal = str_replace(str_replace("'","&apos;",$search),"<mark>".str_replace("'","&apos;",$search)."</mark>",$entryfinal);
-			}
-		
+			$filename = "entries/".$row["id"].".entry";
+			$handle = fopen($filename, "r");
+			$contents = fread($handle, filesize($filename));
+			$entryfinal = $contents;
+			fclose($handle);
 			echo '<div id="note'.$row['id'].'" class="notecard">
 		<div class="innernote">
 			<div class="created">'.formatDate(strtotime($row['created'])).'</div>

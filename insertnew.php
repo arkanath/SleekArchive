@@ -2,13 +2,13 @@
 	date_default_timezone_set('UTC');
 	include 'functions.php';
 	include 'credentials.php';
-	$pass=$_GET['pass'];
+	$pass=$_POST['pass'];
 	if($pass!=APPPASSWORD)
 	{
 		die('Password Incorrect');
 	}
 	include 'db_connect.php';
-	$now = $_GET['now'];
+	$now = $_POST['now'];
 	$seconds = $now;
 
 	$query="INSERT into entries (heading,entry,created,updated) values ('','','".date("Y-m-d H:i:s", $seconds)."','".date("Y-m-d H:i:s", $seconds)."')";

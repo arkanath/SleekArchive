@@ -24,8 +24,6 @@
 		<h2><input id="pass"style="text-align:center; width:20%; margin-left:40%;" name="pass" type="password" placeholder="Password"></input></h2>
 	</form>
 </body>
-	
-	<script src="js/script.js"></script>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
