@@ -20,9 +20,10 @@ function updatenote(){
     // $('#lastupdated'+editingnote).html('Saving...');
     var headi = document.getElementById("inp"+editingnote).value;
     var ent = $("#entry"+editingnote).html();
-    console.log(ent);
+    var entcontent = $("#entry"+editingnote).text();
+    // console.log(ent);
     // alert(ent);
-    $.post( "updatenote.php", {pass: app_pass, id: editingnote, heading: headi, entry: ent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+    $.post( "updatenote.php", {pass: app_pass, id: editingnote, heading: headi, entry: ent, entrycontent: entcontent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
         if(data=='1')
         {
