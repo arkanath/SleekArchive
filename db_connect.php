@@ -20,7 +20,7 @@ if (mysqli_connect_errno($con)){
 }
 $con->query("SET NAMES 'utf8';");
 // If you are connecting via TCP/IP rather than a UNIX socket remember to add the port number as a parameter.
-$query='CREATE TABLE IF NOT EXISTS entries (id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,trash int(11) DEFAULT 0, heading text,entry text,created TIMESTAMP ,updated TIMESTAMP)';
+$query='CREATE TABLE IF NOT EXISTS entries (id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,trash int(11) DEFAULT 0, heading text,entry text,created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,updated TIMESTAMP)';
 $con->query($query);
 $query='SELECT * FROM entries';
 $res = $con->query($query);

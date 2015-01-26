@@ -26,7 +26,7 @@
 	}
 	fwrite($handle, $entry) or die("Unable to write to file!");
 	fclose($handle);
-	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', updated = '".date("Y-m-d H:i:s", $seconds)."' WHERE id=".$id;
+	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."' WHERE id=".$id;
 	if($con->query($query)) echo die('Last Updated '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds))));
 	else echo mysqli_error($con);
 ?>
