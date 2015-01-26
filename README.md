@@ -1,6 +1,7 @@
 SleekArchive
 ============
 
+Check out the GitHub page [here] (http://arkanath.github.io/SleekArchive/)
 php-MySQL based note taking application. Public demonstration can be found [here](http://guesswho15.net/SleekArchive/).
 
 SleekArchive is an open source alternative to applications like Evernote and Google Keep. You can host your own application in a few minutes.
@@ -15,7 +16,7 @@ SleekArchive is an open source alternative to applications like Evernote and Goo
 
 **Installation**:
 
-1. Download source files to your php-mysql enabled host.
+1. Download the source files to your php-mysql enabled host. (git clone or any other way you want)
 2. Edit credentials.php to set your credentials.
 3. You are all set to go!
 
