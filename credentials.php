@@ -1,5 +1,5 @@
 <?php
-	define("HOSTDB", "127.7.55.130"); // The host you want to connect to.
+	define("HOSTDB", "127.7.55.130:3306"); // The host you want to connect to.
 	define("USERDB", "admin4cTvST6"); // The database username.
 	define("DATABASEDB", "SleekArchive" // The database name
 	define("PASSWORDDB", "yDFATlGQMZSk"); // The database password. 
